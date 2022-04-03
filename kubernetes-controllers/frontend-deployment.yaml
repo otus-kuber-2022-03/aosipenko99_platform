@@ -8,24 +8,23 @@ spec:
  replicas: 3
  selector:
   matchLabels:
-   tier: frontend
+   app: frontend
  template:
   metadata:
    labels:
     app: frontend
-    tier: frontend 
   spec:
    containers:
     - name: server
       image: aosipenko99/frontend:v0.0.1 
       readinessProbe:
-            initialDelaySeconds: 10
-            httpGet:
-              path: "/_healthz"
-              port: 8080
-              httpHeaders:
-              - name: "Cookie"
-                value: "shop_session-id=x-readiness-probe"
+        initialDelaySeconds: 10
+        httpGet:
+          path: "/_healthz"
+          port: 8080
+          httpHeaders:
+          - name: "Cookie"
+            value: "shop_session-id=x-readiness-probe"
       env:
       - name: PORT
         value: "8080"

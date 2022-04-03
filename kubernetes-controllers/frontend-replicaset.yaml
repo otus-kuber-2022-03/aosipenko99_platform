@@ -8,19 +8,16 @@ spec:
  replicas: 3
  selector:
   matchLabels:
-   tier: frontend
+   app: frontend
  template:
   metadata:
    labels:
     app: frontend
-    tier: frontend
   spec:
    containers:
     - name: server
       image: aosipenko99/frontend:v0.0.2
       env:
-      - name: PORT
-        value: "8080"
       - name: PRODUCT_CATALOG_SERVICE_ADDR
         value: "productcatalogservice:3550"
       - name: CURRENCY_SERVICE_ADDR

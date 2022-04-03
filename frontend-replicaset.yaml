@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    name: frontend
+    labels:
+        app: frontend
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: frontend
+    template:
+        metadata:
+            labels:
+                app: frontend
+        spec:
+            containers:
+            - name: server
+              image: aosipenko99/frontend:v0.0.2

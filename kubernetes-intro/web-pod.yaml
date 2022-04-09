@@ -8,6 +8,13 @@ spec:
   containers:
     - name: web
       image: aosipenko99/nginxdocker:latest
+      readinessProbe:
+        httpGet:
+          path: /index.html
+          port: 80
+      livenessProbe:
+        tcpSocket:
+          port: 8000
       volumeMounts:
       - name: app
         mountPath: /app
@@ -15,11 +22,11 @@ spec:
         - containerPort: 8000
   volumes:
     - name: app
-      emptyDir: {}        
+      emptyDir: {}
   initContainers:
   - name: init-web
     image: busybox:latest
     command: ['sh', '-c', 'wget -O- https://tinyurl.com/otus-k8s-intro | sh']
     volumeMounts:
       - name: app
-        mountPath: /app        
+        mountPath: /app
